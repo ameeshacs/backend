@@ -1,0 +1,6 @@
+{
+    "jwtPrivateKey":"unsecureKey",
+    "db":"mongodb+srv://admin1:12345@xamdb.riwwi.mongodb.net/XamDB?retryWrites=true&w=majority",
+    "port":"3900",
+    "requireAuth":false
+}
