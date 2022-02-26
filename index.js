@@ -18,4 +18,4 @@ const server = app.listen(port, () =>
 module.exports = server;
 
 
-    //"db":"mongodb+srv://admin1:12345@xamdb.riwwi.mongodb.net/XamDB?retryWrites=true&w=majority",npm 
+    //"db":"mongodb+srv://admin1:12345@xamdb.riwwi.mongodb.net/XamDB?retryWrites=true&w=majority"
