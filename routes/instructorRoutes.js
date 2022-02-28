@@ -5,6 +5,8 @@ const Joi=require('joi');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
+const validateObjectId=require('../middleware/validateObjectId');
+const authz=require('../middleware/Authorization');
 
 router.get('/',async(req, res) => {
     const instructor = await Instructor
@@ -107,7 +109,7 @@ router.get('/:id',validateObjectId,async(req,res) => {
 function validateInstructorPut(req) {
     const schema = Joi.object({
         fullName: Joi.string().min(5).max(40).required(),
-        password: Joi.string().min(8).max(20).required()
+        password: Joi.string().min(8).max(200).required()
     }).options({ abortEarly: false });
 
     return schema.validate(req);

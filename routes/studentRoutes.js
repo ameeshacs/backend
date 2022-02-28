@@ -5,6 +5,8 @@ const Joi=require('joi');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
+const validateObjectId=require('../middleware/validateObjectId');
+const authz=require('../middleware/Authorization');
 
 router.get('/',async(req, res) => {
     const student = await Student

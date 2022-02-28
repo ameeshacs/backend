@@ -14,7 +14,7 @@ module.exports=function(app){
     app.use(express.json());
     app.use('/api/student',cors(),student);
     app.use('/api/instructor',cors(),instructor);
-    app.use('/api/user/login',cors(),studentAuth);
-    app.use('/api/user/login',cors(),instructorAuth);
+    app.use('/api/student/login',cors(),studentAuth);
+    app.use('/api/instructor/login',cors(),instructorAuth);
     app.use(error);
 }
