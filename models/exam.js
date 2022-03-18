@@ -1,53 +1,53 @@
-const Schema = mongoose.Schema;
-const mongoose = require('mongoose');
-const {questionSchema} = require('../models/question')
+// const Schema = mongoose.Schema;
+// const mongoose = require('mongoose');
+// const {questionSchema} = require('../models/question')
 
-const examSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true,
-    },
+// const examSchema = new Schema({
+//     name: {
+//         type: String,
+//         required: true,
+//         unique: true,
+//     },
 
-    instructions: {
-        type: String,
-        required: true
-    },
+//     instructions: {
+//         type: String,
+//         required: true
+//     },
 
-    isEnabled: {
-        type: Boolean,
-        default: true
-    },
+//     isEnabled: {
+//         type: Boolean,
+//         default: true
+//     },
 
-    duration :{
-      hours : {
-        type : Number,
-        default: 0
-      },
+//     duration :{
+//       hours : {
+//         type : Number,
+//         default: 0
+//       },
 
-      minutes : {
-        type : Number,
-        default: 0
-      },
+//       minutes : {
+//         type : Number,
+//         default: 0
+//       },
 
-      seconds : {
-        type : Number,
-        default: 0
-      }
+//       seconds : {
+//         type : Number,
+//         default: 0
+//       }
 
-    },
+//     },
 
-    password: {
-      type: String,
-      required: true,
-      minlength: 8,
-      maxlength: 200
-    }
+//     password: {
+//       type: String,
+//       required: true,
+//       minlength: 8,
+//       maxlength: 200
+//     }
 
-}, {
-    timestamps: true
-});
+// }, {
+//     timestamps: true
+// });
 
-const exam = mongoose.model('Exam', examSchema);
+// const exam = mongoose.model('Exam', examSchema);
 
-exports.Exam = exam;
+// exports.Exam = exam;
