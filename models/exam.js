@@ -19,8 +19,6 @@ const examSchema = new Schema({
         default: true
     },
 
-    questions: [questionSchema],
-
     duration :{
       hours : {
         type : Number,
@@ -37,7 +35,15 @@ const examSchema = new Schema({
         default: 0
       }
 
+    },
+
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+      maxlength: 200
     }
+
 }, {
     timestamps: true
 });

@@ -6,7 +6,8 @@ const cors=require('cors');
 const student=require('../routes/studentRoutes');
 const instructor=require('../routes/instructorRoutes')
 const studentAuth=require('../routes/studentAuthentication');
-const instructorAuth=require('../routes/instructorAuthentication')
+const instructorAuth=require('../routes/instructorAuthentication');
+const exam=require('../routes/examRoutes');
 
 const error=require('../middleware/error');
 
@@ -16,5 +17,6 @@ module.exports=function(app){
     app.use('/api/instructor',cors(),instructor);
     app.use('/api/student/login',cors(),studentAuth);
     app.use('/api/instructor/login',cors(),instructorAuth);
+    app.use('/api/exam',cors(),exam);
     app.use(error);
 }

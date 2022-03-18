@@ -2,9 +2,7 @@ const Schema = mongoose.Schema;
 const mongoose = require('mongoose');
 
 const answerOptionSchema = new Schema({
-    // optionNumber: {
-    //     type: Number
-    //   },
+    
       answerBody: {
         type: String,
         minlength: 1,
