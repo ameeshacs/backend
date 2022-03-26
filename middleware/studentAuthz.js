@@ -2,7 +2,7 @@ const jwt=require('jsonwebtoken');
 const config=require('config');
 
 
-function authz(req,res,next){
+function studentAuthz(req,res,next){
 
     const token=req.header('x-auth-token');
 
@@ -12,7 +12,7 @@ function authz(req,res,next){
 
     try{
         const decoded=jwt.verify(token,config.get('jwtPrivateKey'));
-        req.instructor=decoded;
+        req.student=decoded;
         next();
     }
     catch(ex){
@@ -20,5 +20,4 @@ function authz(req,res,next){
     }
 }
 
-
-module.exports=authz;
+module.exports=studentAuthz;

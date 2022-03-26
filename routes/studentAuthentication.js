@@ -24,10 +24,11 @@ router.post('/', async(req,res) => {
 
     const token = student.generateAuthToken();
     
-    res
-        .header("X-auth-token",token)
-        .header("access-control-expose-headers","x-auth-token")
-        .send(_.pick(student,["_id","userName","email"]));
+    // res
+    //     .header("X-auth-token",token)
+    //     .header("access-control-expose-headers","x-auth-token")
+    //     .send(_.pick(student,["userName","email"]));
+    res.send(token);
 });
 
 

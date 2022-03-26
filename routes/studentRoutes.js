@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 const validateObjectId=require('../middleware/validateObjectId');
-const authz=require('../middleware/Authorization');
+const studentAuthz=require('../middleware/studentAuthz');
 
 router.get('/',async(req, res) => {
     const student = await Student
@@ -49,7 +49,7 @@ router.post('/signup', async(req,res) => {
     }
 });
 
-router.put('/update/:id',authz,async(req,res) => {
+router.put('/update/:id',studentAuthz,async(req,res) => {
     const {error}=validateStudentPut(req.body);
     if(error){
         return res.status(400).send(error.details[0].message);
