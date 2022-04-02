@@ -12,6 +12,11 @@ const instructorAuth=require('../routes/instructorAuthentication');
 const error=require('../middleware/error');
 
 module.exports=function(app){
+    app.use(bodyParser.json())
+    app.use(express.static('public'))
+    app.use(bodyParser.urlencoded({
+        extended:true
+    }))
     app.use(express.json());
     app.use('/api/student',cors(),student);
     app.use('/api/instructor',cors(),instructor);
