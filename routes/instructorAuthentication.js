@@ -33,7 +33,7 @@ router.post('/', async(req,res) => {
     res
         .header("X-auth-token",token)
         .header("access-control-expose-headers","x-auth-token")
-        .send(_.pick(instructor,["_id","userName","email"]))
+        .send(_.pick(instructor,["_id","userName","email"]));
 });
 
 //function to validate the instructor schema
