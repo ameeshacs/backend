@@ -1,3 +1,4 @@
+//js file to check whether all the requirements are fulfilled to connect the backend to the database
 const winston = require("winston");
 const express = require("express");
 const config = require("config");
@@ -10,6 +11,7 @@ require("./startup/config")();
 require("./startup/validation")();
 require("./startup/prod")(app);
 
+//connecting to the port
 const port = process.env.PORT || config.get("port");
 const server = app.listen(port, () =>
   winston.info(`Listening on port ${port}...`)

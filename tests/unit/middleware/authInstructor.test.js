@@ -1,8 +1,9 @@
+//unit testing for the authorization module for the instructor in middleware
 const {Instructor} = require('../../../models/instructor');
 const auth = require('../../../middleware/Authorization');
 const mongoose = require('mongoose');
 
-
+//requesting a jwt  to the instructor authoriztion test module
 describe ('auth middleware', () => {
     it('should populate req.instructor with payload of a valid JWT', () =>{
         const instructor = {

@@ -1,3 +1,5 @@
+//authentication for the student login page
+
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const Joi = require('joi');
@@ -6,17 +8,21 @@ const router = express.Router();
 const _ = require('lodash');
 const {Student}=require('../models/student');
 
+//post method for student login
 router.post('/', async(req,res) => {
     const {error}=validate(req.body);
     if(error){
         return res.status(400).send(error.details[0].message);
     }
 
+    //validations for the student login page
+    //validations for the email/username
     let student=await Student.findOne({email:req.body.email});
     if(!student){
         return res.status(400).send("Invalid Username or Password");
     }
 
+    //validations for pw 
     const validPassword= await bcrypt.compare(req.body.password,student.password);
     if(!validPassword){
         return res.status(400).send("Invalid Username or Password");
@@ -30,7 +36,7 @@ router.post('/', async(req,res) => {
         .send(_.pick(student,["_id","userName","email"]));
 });
 
-
+//function to validate the instructor schema
 function validate(req) {
     const schema = Joi.object({
         email: Joi.string().required().email(),

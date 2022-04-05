@@ -1,8 +1,10 @@
+//instructor model
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
+//creating the schema for the instructors
 const instructorSchema = new mongoose.Schema({
     fullName: {
         type: String,
@@ -33,6 +35,7 @@ const instructorSchema = new mongoose.Schema({
       },
 });
 
+//generate a json web token for the instructor created
 instructorSchema.methods.generateAuthToken = function() {
     const token = jwt.sign({ 
         _id: this._id, 
@@ -42,8 +45,11 @@ instructorSchema.methods.generateAuthToken = function() {
     config.get('jwtPrivateKey'));
     return token;
 }
+
+//creating a mongoose model using the schema
 const instructor = mongoose.model('Instructor', instructorSchema);
 
+//funstion to validate the instructor schema
 function validateInstructor(instructor) {
     const schema = Joi.object({
         fullName:Joi.string().min(5).max(40).required(),
@@ -55,5 +61,7 @@ function validateInstructor(instructor) {
     return schema.validate(instructor);
 }
 
+//export the instructor schema module
 exports.Instructor = instructor;
+//export the validate function
 exports.validate = validateInstructor;

@@ -1,3 +1,5 @@
+//Creating RESTful apis for the student models
+
 const { Student, validate } = require('../models/student');
 const mongoose = require('mongoose');
 const _ = require('lodash');
@@ -8,6 +10,7 @@ const router = express.Router();
 const validateObjectId=require('../middleware/validateObjectId');
 const studentAuthz=require('../middleware/studentAuthz');
 
+//get method to return all students
 router.get('/',async(req, res) => {
     const student = await Student
         .find()
@@ -17,7 +20,9 @@ router.get('/',async(req, res) => {
     res.send(student);
 });
 
+//post method to create a student in the signup
 router.post('/signup', async(req,res) => {
+    //error 400 if the student already exist in the database
     const {error}=validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
@@ -31,6 +36,7 @@ router.post('/signup', async(req,res) => {
         return res.status(400).send("The Username is already registered");
     }
 
+    //create new student
     student = new Student({
         fullName: req.body.fullName,
         userName: req.body.userName,
@@ -38,6 +44,7 @@ router.post('/signup', async(req,res) => {
         password:req.body.password
     });
 
+    //bcrypt the pw of the student 
     const salt = await bcrypt.genSalt(10);
     student.password = await bcrypt.hash(student.password, salt);
 
@@ -49,7 +56,9 @@ router.post('/signup', async(req,res) => {
     }
 });
 
+//put method to update data for a student
 router.put('/update/:id',studentAuthz,async(req,res) => {
+    //error 400 if the student already exist
     const {error}=validateStudentPut(req.body);
     if(error){
         return res.status(400).send(error.details[0].message);
@@ -65,6 +74,7 @@ router.put('/update/:id',studentAuthz,async(req,res) => {
         return res.status(400).send("User with the same Username has already registered");
     }
 
+    //bcrypt the new pw of the student
     const salt = await bcrypt.genSalt(10);
     newPassword = await bcrypt.hash(req.body.password, salt);
 
@@ -81,7 +91,6 @@ router.put('/update/:id',studentAuthz,async(req,res) => {
     );
 
     
-
     if(!studentUpdate){
         return res.status(400).send("Invalid User");
     }
@@ -94,6 +103,7 @@ router.put('/update/:id',studentAuthz,async(req,res) => {
 
 });
 
+//get method to return data of a student
 router.get('/:id',validateObjectId,async(req,res) => {
     const student= await Student
         .findById(req.params.id)
@@ -106,6 +116,7 @@ router.get('/:id',validateObjectId,async(req,res) => {
     res.send(student);
 })
 
+//function validate the student schema
 function validateStudentPut(req) {
     const schema = Joi.object({
         fullName: Joi.string().min(5).max(40).required(),
@@ -115,5 +126,5 @@ function validateStudentPut(req) {
     return schema.validate(req);
 }
 
-
+//export the student router module
 module.exports=router;

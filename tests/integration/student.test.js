@@ -1,3 +1,4 @@
+//integration testing to check the get methods of the student
 const request = require('supertest');
 const {Student} = require('../../models/student');
 const mongoose = require('mongoose');
@@ -12,6 +13,7 @@ describe('/api/student', () =>{
         await Student.remove({});
     });
 
+    //checking whether all students will return
     describe('GET /', () => {
         it('should return all students', async () =>{
             const students = [
@@ -30,6 +32,7 @@ describe('/api/student', () =>{
         });
     });
 
+    //check whether the student will return if the id is passed
     describe('GET /:id', () =>  {
         it('should return a student if valid id is passed', async () => {
             const student = new Student({ fullName : 'student1', userName:"std12", email:"student1@gmail.com", password:"stud712345"});
