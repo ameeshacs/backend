@@ -15,11 +15,11 @@ const error=require('../middleware/error');
 
 module.exports=function(app){
     //process data sent throught the http request body
-    app.use(bodyParser.json())
-    app.use(express.static('public'))
+    // app.use(express.static('public'))
     app.use(bodyParser.urlencoded({
         extended:true
     }))
+    app.use(bodyParser.json())
     app.use(express.json());
     //assigning seperate apis for each route to avoid collision
     app.use('/api/student',cors(),student);
@@ -27,5 +27,5 @@ module.exports=function(app){
     app.use('/api/student/login',cors(),studentAuth);
     app.use('/api/instructor/login',cors(),instructorAuth);
     // app.use('/api/exam',cors(),exam);
-    app.use(error);
+    // app.use(error);
 }
